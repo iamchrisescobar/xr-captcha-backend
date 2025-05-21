@@ -5,6 +5,12 @@ from sentence_transformers import SentenceTransformer, util
 MODEL_NAME = "sentence-transformers/all-roberta-large-v1"
 model = SentenceTransformer(MODEL_NAME)
 
+# ──────────────────────────────────────────────────────────────────────
+# Warm up the model on import so first real request is fast
+# (this runs one dummy encode at startup)
+_ = model.encode("warm up", convert_to_tensor=True)
+# ──────────────────────────────────────────────────────────────────────
+
 # 2. Load and pre-encode all expected-answer embeddings:
 with open("expected_answers.json") as f:
     _raw = json.load(f)

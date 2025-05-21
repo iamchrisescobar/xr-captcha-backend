@@ -8,9 +8,12 @@ def client():
         yield client
 
 def test_missing_prompt_id(client):
-    resp = client.post('/api/get_score', json={'user_answer':'foo'})
+    resp = client.post('/api/get_score', json={'user_answer': 'foo'})
     assert resp.status_code == 400
-    assert b'prompt_id is required' in resp.data
+
+    data = resp.get_json()
+    # Now checking the new error message
+    assert data.get('error') == 'prompt_id is missing or unknown'
 
 def test_valid_score_response(client):
     payload = {'prompt_id':'question_1',
