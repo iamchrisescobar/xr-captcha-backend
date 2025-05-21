@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from model_utils import get_highest_score, _expected_embeddings
+import os 
 
 app = Flask(__name__)
 
@@ -30,4 +31,6 @@ def score():
 
 if __name__ == "__main__":
     # Listen on all interfaces so Docker can map ports
-    app.run(host="0.0.0.0", port=5000)
+    host = os.getenv("HOST", "0.0.0.0")
+    port = int(os.getenv("PORT", 5000))
+    app.run(host=host, port=port)

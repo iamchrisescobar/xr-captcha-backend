@@ -1,6 +1,10 @@
 # Using a slim Python base
 FROM python:3.9-slim
 
+# Default host & port; users can still override with `-e`
+ENV HOST=0.0.0.0 \
+    PORT=5000
+    
 # Install OS-level build tools for any native deps
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
