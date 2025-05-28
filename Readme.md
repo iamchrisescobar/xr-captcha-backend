@@ -67,8 +67,6 @@ xr-captcha-backend/
 
 import flask, torch, sentence\_transformers print("Dependencies loaded successfully!") EOF
 
-````
-
 ---
 
 ## Running the API Locally
@@ -90,9 +88,7 @@ python app.py
 ### Example Request
 
 ```bash
-curl -X POST "http://localhost:5000/api/get_score" \
-     -H "Content-Type: application/json" \
-     -d '{"prompt_id":"question_1","user_answer":"Today is very sunny."}'
+curl -X POST "http://localhost:5000/api/get_score" -H "Content-Type: application/json" -d '{"prompt_id":"question_1","user_answer":"That is a happy person aint it"}' 
 ```
 
 **Response**
